@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Search
+{% endblock %}
+
+{% block content %}
+<div>
+    <h1 class="text-center">Your Search for : <b>{{query}}</b></h1>
+    <br>
+    {% if products %}
+    <div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-4 g-4" style="margin-left:10px;">
+    {% for product in products %}
+        <div class="col">
+            <div class="card text-bg-light text-center" style="width: 18rem;">
+                <a href="{{product.get_url}}">
+                    <img src="{{product.image.url}}" width="250" height="250" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h3 class="card-title">{{product.name}}</h3>
+                    <h4 class="card-title">Rs{{product.price}}</h4>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+        <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-md-4 g-4" style="margin-left:10px;">
+        <div class="col">
+            <div class="card text-bg-light text-center" style="width: 18rem;">
+                <img src="{% static 'img/logo.png' %}" width="250" height="250" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title" style="color:red">Sorry</h3>
+                    <h5 class="card-title">No Related Product Found</h5>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+    </div>
+    <br>
+</div>
+{% endblock %}

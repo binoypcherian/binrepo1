@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    {{product.description}}
+{% endblock %}
+{% block title %}
+    {% if category %}
+    {{product.name}}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div>
+</div>
+<br>
+<div class="container-fluid bg-light">
+  <div class="row" >
+      <div class="col-md-1" style="background-color:white;">
+      </div>
+    <div class="col-md-5" style="background-color:white;">
+            <a href="{{product.get_url}}">
+                <img src="{{product.image.url}}" width="380" height="380" class="img-fluid rounded-start" alt="...">
+            </a>
+    </div>
+    <div class="col-md-5">
+            <div class="card-body">
+                <br>
+                <h2 class="card-title">{{product.name}}</h2>
+                <br>
+                <h3 class="card-title">Rs{{product.price}}</h3>
+                <br>
+                <p class="card-text">Description : {{product.description}}</p>
+                <br>
+                {% if product.stock <= 0 %}
+                <p><b style="color:red"> Out Of Stock </b></p>
+                {% else %}
+                <a href="{% url 'shop:add_cart' product.id %}" class="btn btn-primary">Add To Cart</a>
+                {% endif %}
+            </div>
+    </div>
+      <div class="col-md-1" style="background-color:white;">
+      </div>
+    </div>
+</div>
+<br>
+{% endblock %}
